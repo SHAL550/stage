@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Population Visualisation System</title>
+
+<link rel="shortcut icon" href="images/LOGO.jpg" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #2c5364);
+    color: white;
+    padding-top: 80px;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 50, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    background: white;
+    color: darkblue;
+}
+
+.logo {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    position: fixed;
+    top: 0;
+    left: 20px;
+    z-index: 1100;
+}
+
+header {
+    text-align: center;
+    padding: 80px 20px 30px;
+}
+
+header h1 {
+    font-size: 40px;
+    margin: 0;
+    text-shadow: 2px 2px 10px black;
+}
+
+header p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.my-paragraph {
+    font-size: 18px;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.image {
+    flex: 1;
+    min-width: 300px;
+}
+
+.image img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.image img:hover {
+    transform: scale(1.03);
+}
+
+.section-title {
+    text-align: left;
+    margin-top: 40px;
+    font-size: 22px;
+    color: black;
+    font-weight: bold;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  max-width: 1600px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  padding: 10px;
+
+}
+.slides {
+  position: relative;
+}
+
+.slide {
+  width: 100%;
+  display: none;
+  height:100%;
+  
+}
+
+.slide.active {
+  display: block;
+}
+
+.footer-page {
+    text-align: center;
+    color: rgb(115, 117, 219);
+    background-color: rgb(247, 247, 250);
+}
+h2 {
+    font-size: 18px;
+    font-weight: bold;
+    flex: 2;
+    margin-left: 10%;
+    
+
+}
+.footer-page {
+    background: #0a0a2a;
+    color: white;
+    padding: 40px 20px;
+    margin-top: 50px;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-page h3 {
+    margin-bottom: 10px;
+    color: #74d4f4;
+}
+
+.footer-page p,
+.footer-page li {
+    font-size: 14px;
+    line-height: 1.6;
+    list-style: none;
+}
+
+.social-icons {
+    margin-top: 15px;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 18px;
+    color: white;
+    background: #238af1;
+    padding: 10px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    background: white;
+    color: #238af1;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 13px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 15px;
+}
+
+.stats {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.card {
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 50px;
+    width: 200px;
+    transition: 0.3s;
+    box-shadow: 0 8px 20px rgba(37,117,252,0.4);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+button {
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    background-color: red;
+    width: auto;
+}
+button:hover {
+    color: black;
+    background-color: white;
+}
+.login {
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    background-color: blue;
+    width: auto;
+}
+.login:hover {
+    color: black;
+    background-color: white;
+}
+
+</style>
+</head>
+
+<body>
+
+<img src="images/LOGO.jpg" class="logo">
+
+<div class="navbar">
+    <h2>📊Rwanda Population</h2>
+    <button class="login" onclick="login()">Login</button>
+   <a href="home.html">Home</a>
+    <a href="provinces.html">Statistics</a>
+    <a href="about.html">About</a><br>
+    <a href="Map.html">Map</a>
+    <button onclick="logout()">Logout</button>
+</div>
+<br><br>
+
+<header>
+    <h1>📊RWANDA POPULATION VISUALISATION SYSTEM</h1>
+    <p>Explore population data across provinces and districts in Rwanda</p>
+</header>
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="text">
+            <p class="my-paragraph">
+                Rwanda has a fast-growing population with strong development in health and education.
+            The population is estimated between <strong>14.8M-14.9M(2026).</strong></span>
+            </p>
+        </div>
+
+        <div class="image">
+            <img src="images/img11.jpg" alt="Rwanda Population">
+        </div>
+    </div>
+
+</div>
+<div class="slider">
+
+  <div class="slides">
+    <img src="images/img14.jpg" class="slide active">
+    <img src="images/img13.jpg" class="slide">
+    <img src="images/img8.jpg" class="slide">
+    <img src="images/img7.jpg" class="slide">
+  </div>
+
+<div class="stats">
+    <h2>Key Statistics</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>14.8M-14.9M</h3>
+            <p>The estimate Population of Rwanda in 2026</p>
+        </div>
+
+        <div class="card">
+            <h3>5</h3>
+            <p>Provinces</p>
+        </div>
+
+        <div class="card">
+            <h3>30</h3>
+            <p>Districts</p>
+        </div>
+        <div class="card">
+            <h3>23,387</h3>
+            <p>Gross Domestic Product(bn RWF)</p>
+            <h3>2025</h3>
+        </div>
+        <div class="card">
+            <h3>200.8</h3>
+            <p>Consumer Price Index</p>
+            <h3>March 2026</h3>
+        </div>
+        <div class="card">
+            <h3>70.5</h3>
+            <p>Life Expectance at Birth</p>
+            <h3>2026</h3>
+        </div>
+        <div class="card">
+            <h3>14,418,145</h3>
+            <p>Resident Population</p>
+            <h3>2026</h3>
+        </div>
+        <div class="card">
+            <h3>92.9%</h3>
+            <p>2025</p>
+            <h3>2025</h3>
+        </div>
+    </div>
+</div>
+<div class="footer-page">
+    <div class="footer-container">
+
+        <div class="footer-left">
+            <h3>About</h3>
+            <p><ol>
+               <li>Population Visualisation System helps Rwandans and visitors
+                understand population data across the country.<br></li>
+                <li>The population Visualisation also helps the Government 
+                of Rwanda to carry out the population census.</li>
+                </ol>
+            </p>
+            <h3>Parternship</h3>
+            <p>Rwanda Population Visualisation System relies on the Information from the:<br>
+                 NATIONAL INSTITUTE OF STATIC OF RWANDA(NSIR)
+            </p>
+        </div>
+
+        <div class="footer-center">
+            <h3>Contact</h3>
+            <i class="fa fa-envelope"></i> populationvisualisation@gmail.com
+            <p>Phone: (+250) 0788489010</p>
+            <p>Phone: (+250) 0788343456</p>
+        </div>
+
+        <div class="footer-right">
+            <h3>Follow Us</h3>
+
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Population Visualisation System | All Rights Reserved
+    </div>
+</div>
+<script>
+    let index = 0;
+const slides = document.querySelectorAll(".slide");
+
+function showSlide(i) {
+  slides.forEach(slide => slide.classList.remove("active"));
+
+  index = (i + slides.length) % slides.length;
+  slides[index].classList.add("active");
+}
+
+function changeSlide(step) {
+  showSlide(index + step);
+}
+
+setInterval(() => {
+  changeSlide(1);
+}, 3000);
+
+showSlide(0);
+
+function logout(){
+    localStorage.removeItem("user");
+    alert("You have logout!")
+    window.location.href="login form.html"
+}
+function login(){
+    window.location.href="login form.html"
+}
+</script>
+</body>
+</html>

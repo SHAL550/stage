@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rwanda Population Visualisation</title>
+<link rel="shortcut icon" href="images/LOGO.jpg" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #2c5364);
+    color: white;
+    padding-top: 80px;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 50, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    background: white;
+    color: darkblue;
+}
+
+header {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.data-section {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+
+#searchInput {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 20px;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    color: black;
+}
+
+th {
+    background: #00c6ff;
+    padding: 10px;
+    cursor: pointer;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.province-title td {
+    background: #0f2027;
+    color: #00c6ff;
+    font-weight: bold;
+    text-align: left;
+}
+
+tbody tr:nth-child(even):not(.province-title) {
+    background: #f9f9f9;
+}
+
+tbody tr:hover {
+    background: #e6f7ff;
+}
+
+.footer-page {
+    background: #0a0a2a;
+    padding: 30px;
+    margin-top: 50px;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 10px;
+}
+.footer-page {
+    text-align: center;
+    color: rgb(115, 117, 219);
+    background-color: rgb(247, 247, 250);
+}
+h2 {
+    font-size: 18px;
+    font-weight: bold;
+    flex: 2;
+    margin-left: 10%;
+    
+
+}
+.footer-page {
+    background: #0a0a2a;
+    color: white;
+    padding: 40px 20px;
+    margin-top: 50px;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-page h3 {
+    margin-bottom: 10px;
+    color: #74d4f4;
+}
+
+.footer-page p,
+.footer-page li {
+    font-size: 14px;
+    line-height: 1.6;
+    list-style: none;
+}
+
+.social-icons {
+    margin-top: 15px;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 18px;
+    color: white;
+    background: #238af1;
+    padding: 10px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    background: white;
+    color: #238af1;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 13px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 15px;
+}
+.paragraph {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    background: white;
+    color: black;
+    border-radius: 40px;
+    padding: 30px;
+    transition: 0.3s;
+    transform: translateY(-10px);
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.my-paragraph {
+    font-size: 18px;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.image {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    gap: 15px;
+}
+
+.image img {
+    width: 50%;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.image img:hover {
+    transform: scale(1.03);
+}
+.pop {
+    text-align: center;
+}
+.actions { text-align: center; }
+.actions button {
+    padding: 4px 8px;
+    margin: 2px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+.edit-btn { background: #28a745; color: white; }
+.delete-btn { background: #dc3545; color: white; }
+
+h2 {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <h2>📊Rwanda Population</h2>
+   <a href="home.html">Home</a>
+    <a href="provinces.html">Statistics</a>
+    <a href="about.html">About</a>
+    <a href="Map.html">Map</a>
+    
+</div>
+
+<header>
+    <h1>Rwanda Population Visualisation System</h1>
+    <p>Explore all district's population data</p>
+</header>
+<div class="pop">
+    🔴:Most Populated district<br>
+    🔵:Least Populated district
+    </div>
+    <hr>
+<section class="data-section">
+<h2>Population by District(Estimated population in 2026)</h2>
+
+<input type="text" id="searchInput" placeholder="Search..." onkeyup="searchTable()">
+
+<table id="populationTable">
+<thead>
+<tr>
+<th onclick="sortTable(1)">District ⬍</th>
+<th onclick="sortTable(2)">Population ⬍</th>
+<th >Actions(Edit/Delete)</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr class="province-title"><td colspan="3">Kigali City</td></tr>
+<tr><td>Nyarugenge</td><td>408,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr>
+<tr><td style="color: red;">Gasabo</td><td style="color: red;">958,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Kicukiro</td><td>536,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+
+<tr class="province-title"><td colspan="3">Northern Province</td></tr>
+<tr><td>Musanze</td><td>436,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Burera</td><td>423,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Gakenke</td><td>392,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Rulindo</td><td>349,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Gicumbi</td><td>490,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+
+<tr class="province-title"><td colspan="3">Southern Province</td></tr>
+<tr><td>Huye</td><td>416,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Nyanza</td><td>398,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Gisagara</td><td>433,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td style="color: blue;">Nyaruguru</td><td style="color: blue;">347,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Nyamagabe</td><td>405,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Ruhango</td><td>377,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Muhanga</td><td>381,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Kamonyi</td><td>414,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+
+<tr class="province-title"><td colspan="3">Eastern Province</td></tr>
+<tr><td>Rwamagana</td><td>529,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Kayonza</td><td>498,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Ngoma</td><td>440,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Kirehe</td><td>502,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Bugesera</td><td>601,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Gatsibo</td><td>601,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Nyagatare</td><td>713,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+
+<tr class="province-title"><td colspan="3">Western Province</td></tr>
+<tr><td>Rubavu</td><td>440,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Karongi</td><td>403,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Rusizi</td><td>435,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Nyamasheke</td><td>435,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Ngororero</td><td>371,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Rutsiro</td><td>354,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+<tr><td>Nyabihu</td><td>350,000</td><td class="actions"><button class="edit-btn" onclick="editRow(this)">✏️</button><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td></tr></tr>
+
+</tbody>
+</table>
+</section>
+</div>
+<h3>Printing Button:</h3>
+<input type="button" value="print" onclick="printPage()" style="color: red;"/>
+<br>
+<br>
+<div class="paragraph">
+    <section>
+        Based on Fifth Rwanda Population and Housing Census made in 2022(2022 RPHC),
+        Rwandan populationis 13,246,394.,of which 51.5% are females while 48.5% are males.
+        The results indicates that the population of Rwanda has increased by 2.7 million,
+        signifying an average annual growth rate 2.3% compared to the 2012 RPHC.
+
+</section>
+<section>
+    Regardingthe distribution of population by province, the East and South are the mpst densely populated provinces ,
+    constituting half of the total population of Rwanda.
+    Population distribution by districts shows that Gasabo in the city of Kigali is the most populous district in Rwanda,
+    while Nyaruguru in the Southern Province and Nyabihu in Western Province are the least populous districts.
+</section>
+<section>
+    In terms of population density, Rwandan's population density rose sharply to 503 habitants per square kilometer,
+    in 2022 census,from 415 in 2012,321 in 2002,272 in 1991 and 183 in 1978.
+</section>
+<section>
+    Concerning the age structure of the population, the 2022 RPHC shows that Rwanda has a large youthful population with the median age of 20 years.
+    indicating that half of the country's population is under 20 years old.
+    Only 4.2% of Rwandan population are aged 65 years and above .The same results indicates that the mean age of Rwandan population is 24,6 years.
+</section>
+<section>
+    <div class="container">
+    <div class="row">
+        <div class="text">
+            <p class="my-paragraph">
+                <h1>DID YOU KNOW?💡</h1>
+            1.Rural population of Rwanda in 2024 was 11,678,873 people(81.9%).<br>
+            2.Urban population of Rwanda in 2024 was 2,577,730 people(18.1%).<br>
+            So,the Rural areas in Rwanda are more populated than Urban areas even if Gasabo is the most populated district.
+            </p>
+        </div>
+
+        <div class="image">
+            <img src="images/img9.jpg" alt="Rwandans">
+            <img src="images/img12.jpg" alt="Rwandans">
+        </div>
+    </div>
+
+</div>
+</div>
+</section>
+<section>
+    <h2><u>DATA SOURCES</u></h2>
+   <strong>1.<u>Censuses </u>:</strong>
+   This contains a list of various censuses conducted by NSIR.<br>
+   Some of these censuses are conducted every ten tears.<br>
+   Censuses are now part of a larger system of different surveys.
+   <br>
+   <ul>
+    <li>Civil Servant Census</li>
+    <li>Establishment Census</li>
+    <li>Foreign Private Capital Census</li>
+    <li>Population and Housing Census</li>
+   </ul>
+   <br>
+   <strong>2.<u>Surveys</u>:</strong>
+   This provides detailed information on different surveys conducted by NISR ,<br>
+   and for which the data are collected from people using a method of data collection .<br>
+   and then analyzed statistically.
+   <br>
+   <ul>
+    <li>Agricultural Household Survey</li>
+    <li>Formal external trade in Goods Survey</li>
+    <li>Comprehensive Food Security and Vulnerability and Nutrition Analysis Survey(CFSVA)</li>
+    <li>Consumer Price Index(CPI) Survey</li>
+    <li>Demographic and Health Survey(DHS)</li>
+    <li>Districts Baseline Survey</li>
+    <li>Enterprise Survey</li>
+    <li>Fertility Survey</li>
+    <li>FinScope Survey</li>
+    <li>Index of Industrial Production(IIp)</li>
+    <li>Informal Sector Survey</li>
+    <li>Integrated Household Living Conditions Survey(EICV)</li>
+    <li>Labour Force Survey</li>
+    <li>Mortality Assessment</li>
+    <li>Multiple Indicators Cluster Survey</li>
+    <li>National Child labour Survey</li>
+    <li>National Manpower Survey</li>
+    <li>Producer Price Index(PPI) Survey</li>
+    <li>Rapid Health Facility Assessment Survey</li>
+    <li>Seasonal Agricultural Survey</li>
+    <li>Service Availability Mapping Survey</li>
+    <li>Service Provision Assessment(SPA) Survey</li>
+    <li>Travel Expenditure Survey</li>
+    <li>User Satisfication Survey</li>
+    <li>Vision 2020 Umurenge Program(VUP)-Baseline Survey</li>
+   </ul>
+   <br>
+   <strong>3.<u>Administrative records</u>:</strong>
+   This contains statistics that are collected as a by-product of large-scale administrative systems<br>
+    including data from Civil Registration and Vital Statistics Systems,<br>
+    Statistical Yearbooks etc..
+    <br>
+    <ul>
+        <li>Imihigo Evaluation</li>
+        <li>Civil Registration and Vital Stastics(CVRS)</li>
+        <li>Statistical Yearbook</li>
+    </ul>
+</section>
+<div class="footer-page">
+    <div class="footer-container">
+
+        <div class="footer-left">
+            <h3>About</h3>
+            <p>
+               Population Visualisation System helps Rwandans and visitors
+                understand population data across the country.<br>
+                <li>The population Visualisation also helps the Government 
+                of Rwanda to carry out the population census.
+              <u>  <h2>For more Information</h2></u>
+                <strong>Visit :</strong><a href="http://www.statistics.gov.rw/node">http://www.statistics.gov.rw/node</a>
+            </p>
+        </div>
+        <div class="footer-center">
+            <h3>Contact</h3>
+            <p>Email: populationvisualisation@gmail.com</p>
+            <p>Phone: (+250) 0788489010</p>
+            <p>Phone: (+250) 0788343456</p>
+        </div>
+        <div class="footer-right">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+    </div>
+<script>
+
+function searchTable() {
+let input = document.getElementById("searchInput").value.toLowerCase();
+let rows = document.querySelectorAll("#populationTable tbody tr");
+
+rows.forEach(row => {
+    let text = row.textContent.toLowerCase();
+
+    if (row.classList.contains("province-title")) {
+        row.style.display = "";
+    } else {
+        row.style.display = text.includes(input) ? "" : "none";
+    }
+});
+}
+
+function sortTable(n) {
+let table = document.getElementById("populationTable");
+let rows = Array.from(table.rows).slice(1);
+let asc = true;
+
+rows.sort((a, b) => {
+if (a.classList.contains("province-title")) return -1;
+if (b.classList.contains("province-title")) return 1;
+
+let x = a.cells[n-1].innerText.replace(/,/g,'');
+let y = b.cells[n-1].innerText.replace(/,/g,'');
+
+return asc ? x - y : y - x;
+});
+
+rows.forEach(row => table.appendChild(row));
+}
+
+function deleteRow(btn) {
+    btn.parentElement.parentElement.remove();
+}
+
+function editRow(btn) {
+    let row = btn.parentElement.parentElement;
+     let cells = row.querySelectorAll("td");
+
+    let newDistrict = prompt("Edit District:", cells[0].innerText);
+    let newPopulation = prompt("Edit Population:", cells[1].innerText);
+
+    if (newDistrict !== null && newPopulation !== null) {
+        cells[0].innerText = newDistrict;
+        cells[1].innerText = newPopulation;
+    }
+}
+function printPage(){
+    window.print();
+}
+
+
+</script>
+
+</body>
+</html>

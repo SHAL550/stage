@@ -1,0 +1,253 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login & Sign Up</title>
+
+<!-- FONT AWESOME (for eye icon) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #2c5364);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px gray;
+}
+
+h2 {
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.password-box {
+    position: relative;
+}
+
+.password-box input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 40px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.password-box i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: gray;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: blue;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2e59d9;
+}
+
+.switch {
+    text-align: center;
+    margin-top: 10px;
+    color: blue;
+    cursor: pointer;
+}
+
+.error {
+    text-align: center;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+#signupForm {
+    display: none;
+}
+.logo {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    position: fixed;
+    top: 0;
+    left: 20px;
+    z-index: 1100;
+}
+</style>
+</head>
+
+<body>
+    <img src="images/LOGO.jpg" class="logo">
+
+<div class="container">
+
+<div id="loginForm">
+    <h2>Login</h2>
+
+    <div class="input-group">
+        Names:
+        <input type="text" id="loginName" placeholder="Username">
+    </div>
+
+    <div class="input-group">
+        Email:
+        <input type="email" id="loginEmail" placeholder="Email">
+    </div>
+
+    <div class="input-group password-box">
+        Password:
+        <input type="password" id="loginPassword" placeholder="Password">
+        <i class="fa-solid fa-eye" onclick="togglePassword('loginPassword', this)"></i>
+    </div>
+
+    <button onclick="login()">Login</button>
+
+    <div class="switch" onclick="showSignup()">Don't have an account? Sign Up</div>
+    <div class="error" id="loginError"></div>
+</div>
+
+<div id="signupForm">
+    <h2>Sign Up</h2>
+
+    <div class="input-group">
+        Usernames:
+        <input type="text" id="signupName" placeholder="Username">
+    </div>
+
+    <div class="input-group">
+        Email:
+        <input type="email" id="signupEmail" placeholder="Email">
+    </div>
+
+    <div class="input-group password-box">
+        Password:
+        <input type="password" id="signupPassword" placeholder="Password">
+        <i class="fa-solid fa-eye" onclick="togglePassword('signupPassword', this)"></i>
+    </div>
+
+    <div class="input-group password-box">
+        Confirm Password:
+        <input type="password" id="confirmPassword" placeholder="Confirm Password">
+        <i class="fa-solid fa-eye" onclick="togglePassword('confirmPassword', this)"></i>
+    </div>
+
+    <button onclick="signup()">Register</button>
+
+    <div class="switch" onclick="showLogin()">Already have an account? Login</div>
+    <div class="error" id="signupError"></div>
+</div>
+
+</div>
+
+<script>
+
+function showSignup() {
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("signupForm").style.display = "block";
+}
+
+function showLogin() {
+    document.getElementById("signupForm").style.display = "none";
+    document.getElementById("loginForm").style.display = "block";
+}
+
+function togglePassword(id, icon) {
+    let input = document.getElementById(id);
+
+    if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    } else {
+        input.type = "password";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    }
+}
+
+function login() {
+    let name = document.getElementById("loginName").value;
+    let email = document.getElementById("loginEmail").value;
+    let password = document.getElementById("loginPassword").value;
+    let error = document.getElementById("loginError");
+
+    if (name === "" || email === "" || password === "") {
+        error.style.color = "red";
+        error.textContent = "Fill all fields!";
+    } else if (password.length < 6) {
+        error.style.color = "red";
+        error.textContent = "Password must be at least 6 characters!";
+    } else {
+        error.style.color = "green";
+        error.textContent = "Login successful!";
+        window.location.href = "home.html";
+    }
+}
+
+function signup() {
+    let name = document.getElementById("signupName").value;
+    let email = document.getElementById("signupEmail").value;
+    let password = document.getElementById("signupPassword").value;
+    let confirm = document.getElementById("confirmPassword").value;
+    let error = document.getElementById("signupError");
+
+    if (name === "" || email === "" || password === "" || confirm === "") {
+        error.style.color = "red";
+        error.textContent = "Fill all fields!";
+    } 
+    else if (password.length < 6) {
+        error.style.color = "red";
+        error.textContent = "Password must be at least 6 characters!";
+    }
+    else if (password !== confirm) {
+        error.style.color = "red";
+        error.textContent = "Passwords do not match!";
+    }
+    else {
+        error.style.color = "green";
+        error.textContent = "Registration successful!";
+
+        localStorage.setItem("userEmail", email);
+        localStorage.setItem("userPassword", password);
+
+        setTimeout(showLogin, 1500);
+    }
+}
+
+</script>
+
+</body>
+</html>
